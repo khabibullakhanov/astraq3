@@ -1,0 +1,43 @@
+#banking-card-comapnent-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+#banking-card-comapnent-line-first {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#banking-card-comapnent-line-first-img {
+    border: 2px solid #ECEFF7;
+    padding: 12px;
+}
+
+#banking-card-comapnent-line-first-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#banking-card-comapnent-line-second {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 17px;
+}
+
+#banking-card-comapnent-line-third {
+    display: flex;
+    gap: 1rem;
+    font-size: 18px;
+}
+
+#banking-card-comapnent-line-fourth {
+    display: flex;
+    gap: 2rem;
+    color: #5149E4;
+}
+

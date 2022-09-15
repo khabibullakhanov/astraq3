@@ -1,0 +1,21 @@
+#pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#pagination button {
+    background: none;
+    border: 2px solid #8A96B1;
+    padding: 5px 15px;
+    color: #8A96B1;
+    font-weight: 600;
+    transition: 0.4s ease-in-out;
+    font-size: 18px;
+}
+
+#pagination #active {
+    background-color: #5149E4;
+    color: white;
+    border: 2px solid #5149E4;
+}

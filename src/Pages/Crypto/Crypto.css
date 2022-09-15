@@ -1,0 +1,146 @@
+#crypto-main {
+    display: flex;
+    gap: 2rem;
+}
+
+#crypto-main-container-right {
+    background-color: #F9FAFF;
+    width: 28%;
+}
+
+
+#crypto-main-container-left {
+    width: 72%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#crypto-period-container {
+    display: flex;
+    border: 3px solid #ECEFF7;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+/* crypto-period-container-left STYLE  */
+
+#crypto-oldi-berdi {
+    width: 30px;
+    height: 30px;
+}
+
+#crypto-period-container-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#crypto-period-container-left-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    background-color: #ECEFF7;
+    padding: 7px 15px;
+}
+
+#crypto-period-container-left-left-img {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#crypto-period-container-left-left-img :nth-child(1) {
+    background-color: #5149E4;
+    padding: 3px 5px;
+    border: 1px solid #5149E4;
+}
+
+#crypto-period-container-left-left-img :nth-child(1)>img {
+    width: 25px;
+    height: 25px;
+}
+
+
+#crypto-period-container-left-left-select {
+    background: none;
+    border: none;
+    outline: none;
+    width: 15px;
+}
+
+
+#crypto-period-container-left-right {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    background-color: #ECEFF7;
+    padding: 7px 15px;
+}
+
+#crypto-period-container-left-right-img {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#crypto-period-container-left-right-img-img {
+    background-color: #FFB9CD;
+    padding: 3px 5px;
+    border: 1px solid #FFB9CD;
+}
+
+
+#crypto-period-container-left-right-img-img>img {
+    width: 25px;
+    height: 25px;
+}
+
+#crypto-period-container-left-right-img-select {
+    background: none;
+    border: none;
+    outline: none;
+    width: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* crypto-period-container-right STYLE  */
+#crypto-period-container-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+#crypto-period-container-right-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#crypto-period-container-right-blue {
+    background-color: #5149E4;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+#crypto-period-container-right-grey {
+    background-color: #ECEFF7;
+    padding: 10px;
+    color: #5149E4;
+    font-weight: 600;
+}

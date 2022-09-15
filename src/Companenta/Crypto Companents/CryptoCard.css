@@ -1,0 +1,37 @@
+#crypto-cards-main-container {
+    display: flex;
+    gap: 2rem;
+}
+
+#crypto-card-container {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    background: #F9FAFF;
+    width: 31.4%;
+    padding: 30px 50px 30px 30px;
+}
+
+#card-container-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 50%;
+}
+
+#card-container-right {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#card-container-right-inside {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#card-container-right-inside >p {
+    font-size: 15px;
+}

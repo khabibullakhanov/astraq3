@@ -1,0 +1,269 @@
+#dashboard-main {
+    width: 100%;
+    display: flex;
+}
+
+#dashboard-main-left {
+    width: 72%;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#dashboard-main-right {
+    width: 28%;
+    background-color: #F9FAFF;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#dashboard-main-right>h1 {
+    padding-left: 40px;
+}
+
+#dashboard-text {
+    /* margin: 40px 0; */
+}
+
+#activity {
+    display: flex;
+    width: 71%;
+    justify-content: space-between;
+    /* margin: 40px 0 40px 0; */
+}
+
+#activity-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#activity-right-first {
+    display: flex;
+    gap: 0.8rem;
+}
+
+#ativity-purple {
+    height: 18px;
+    width: 18px;
+    background-color: #5149E4;
+}
+
+#activity-pink {
+    background-color: #FFB9CD;
+    height: 18px;
+    width: 18px;
+}
+
+#balance-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    background-color: #F9FAFF;
+    padding: 30px;
+    width: 100%;
+    /* margin: 50px 0; */
+}
+
+/* Firs card Style */
+
+#first-balance-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-right: 1px solid #8A96B1;
+    padding-right: 30px;
+}
+
+#first-balance-container-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#first-balance-container-left-img-container {
+    background-color: #5149E4;
+    height: 55px;
+    width: 55px;
+}
+
+
+#first-balance-container-left-img-container>img {
+    margin-top: 13px;
+    margin-left: 16px;
+    width: 25px;
+    height: 25px;
+}
+
+#first-balance-container-left-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#first-balance-container-left-text>p {
+    color: #8A96B1;
+}
+
+#first-balance-container-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#first-balance-container-right>span {
+    font-weight: 600;
+}
+
+#first-balance-container-right-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#first-balance-container-right-text>p {
+    color: #00A389;
+    font-weight: 600;
+}
+
+#first-balance-container-right-text>span {
+    color: #8A96B1;
+}
+
+/* Second Card Style */
+
+#second-balance-container {
+    display: flex;
+    align-items: center;
+    gap: 2.9rem;
+}
+
+#second-balance-container-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#second-balance-container-left-img-container {
+    background-color: #00A389;
+    width: 55px;
+    height: 55px;
+}
+
+#second-balance-container-left-img-container>img {
+    margin-top: 15px;
+    margin-left: 18px;
+    width: 22px;
+    height: 22px;
+}
+
+#second-balance-container-left-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#second-balance-container-left-text>p {
+    color: #8A96B1;
+}
+
+/* Third card Style */
+
+#third-balance-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+#third-balance-container-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#third-balance-container-left-img-container {
+    background-color: #FF5B5B;
+    width: 55px;
+    height: 55px;
+}
+
+#third-balance-container-left-img-container>img {
+    margin-top: 15px;
+    margin-left: 18px;
+    width: 22px;
+    height: 22px;
+    transform: rotate(180deg);
+}
+
+#third-balance-container-left-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#third-balance-container-left-text>p {
+    color: #8A96B1;
+}
+
+/* Footer */
+
+#dash-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#dashboard-piechart-container {
+    display: flex;
+}
+
+#dashboard-piechart {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+}
+
+#chart-height {
+    height: 70vh;
+}
+
+#dashboard-piechart-container {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 5rem;
+}
+
+#dashboard-piechart-container-center {
+    width: 4px;
+    background-color: #8A96B1;
+}
+
+#dashboard-piechart-container-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px;
+}
+
+#dashboard-piechart-container-right-top {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#column-charts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#column-charts p {
+    padding-left: 40px;
+}

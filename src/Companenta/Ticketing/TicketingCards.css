@@ -1,0 +1,23 @@
+#ticketing-companents-cards-container {
+    display: flex;
+    gap: 1rem;
+}
+
+#ticketing-companents-cards-content {
+    /* width: 12%; */
+    background-color: #F9FAFF;
+    padding: 25px 92px 25px 30px;
+}
+
+#ticketing-companents-cards-content h1 {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+#ticketing-companents-cards-content-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 18px;
+    color: #8A96B1;
+}

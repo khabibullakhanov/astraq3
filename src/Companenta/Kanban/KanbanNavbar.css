@@ -1,0 +1,18 @@
+#kanban-navbar-container {
+    display: flex;
+    gap: 3rem;
+    margin: 0 0 60px 0;
+    border-bottom: 1.8px solid #8A96B1;
+    padding-bottom: 20px;
+    border-radius: 2px;
+}
+
+#kanban-navbar-container a {
+    text-decoration: none;
+    color: #8A96B1;
+    font-size: 18px;
+}
+
+.active {
+    
+}

@@ -1,0 +1,305 @@
+#banking-main-container-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 70%;
+    padding-right: 3%;
+}
+
+#banking-main-container-left-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#banking-main-container-left-main-top {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+
+#banking-main-container {
+    display: flex;
+}
+
+#banking-main-container-left-main-top-main {
+    background-color: #F9FAFF;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#banking-main-container-left-main-top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#banking-main-container-left-main-top-header>div {
+    border: 2px solid #8A96B1;
+    padding: 8px 18px;
+}
+
+
+#banking-main-container-left-main-top-header select {
+    background: none;
+    color: #8A96B1;
+    padding: 0 5px;
+    font-weight: 600;
+    border: none;
+}
+
+#banking-main-container-left-main-top-header>h2 {
+    font-weight: 600;
+}
+
+#banking-main-container-left-main-top-main-inside {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+#banking-main-container-left-main-top-main-left {
+    display: flex;
+    flex-direction: column;
+}
+
+#banking-main-container-left-main-top-main-left-inside {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+#banking-main-container-left-main-top-main-left-inside-icon-div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#green-color-banking {
+    color: #00A389;
+    font-weight: 600;
+}
+
+#pink-color-banking {
+    color: #FF5B5B;
+    font-weight: 600;
+}
+
+#grey-color {
+    color: #8A96B1;
+}
+
+#font-weight-600 {
+    font-weight: 600;
+}
+
+#banking-main-container-main-top-main-left-inside-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#banking-main-container-left-main-bottom {
+    background-color: #F9FAFF;
+    padding: 30px 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#banking-main-container-left-main-bottom-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#banking-main-container-left-main-bottom-header-right {
+    display: flex;
+    gap: 1rem;
+}
+
+#banking-main-container-left-main-bottom-header-right-select select {
+    background: none;
+    border: none;
+    color: #8A96B1;
+    padding-right: 10px;
+}
+
+#banking-main-container-left-main-bottom-header-right-select {
+    border: 1px solid #ECEFF7;
+    padding: 10px 15px;
+}
+
+#border-grey {
+    border: 1px solid #ECEFF7;
+    padding: 10px 15px;
+}
+
+/* Right content */
+
+#banking-main-container-right {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #F9FAFF;
+}
+
+#banking-main-container-right-credit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+#banking-main-container-right-credit-container>img {
+    width: 85%;
+}
+
+#banking-main-container-right-credit-container>button {
+    background: #ECEFF7;
+    outline: none;
+    border: 1px solid #ECEFF7;
+    width: 85%;
+    border-radius: 10px;
+    padding: 10px;
+    color: #5149E4;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+#banking-main-container-right-transfer-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#banking-main-container-right-transfer-container-inside {
+    padding: 30px 0;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    margin: 0 auto;
+}
+
+#banking-main-container-right-transfer-container-inside-divs-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 0 auto;
+    justify-content: center;
+}
+
+#banking-right-grey-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#banking-right-grey-background {
+    background-color: #8A96B1;
+    width: 45px;
+    height: 45px;
+}
+
+#bankingright-blue-button-div {
+    background-color: #5149E4;
+    height: 100%;
+}
+
+#bankingright-blue-button-div>button {
+    background-color: #5149E4;
+    padding: 5px 15px;
+    border: 1px solid #5149E4;
+    color: white;
+    font-size: 22px;
+}
+
+#banking-main-container-right-amount-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#banking-main-container-right-amount-container>input {
+    background-color: #ECEFF7;
+    border: 1px solid #ECEFF7;
+    padding: 5px 10px;
+}
+
+#banking-right-transfer-comtainer-send {
+    display: flex;
+    gap: 1rem;
+    background-color: #5149E4;
+    outline: none;
+    border: 1px solid #5149E4;
+    color: white;
+    width: 85%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+#banking-right-transfer-comtainer-send>img {
+    width: 20px;
+    height: 20px;
+}
+
+#banking-main-container-right-progress-div {
+    background-color: white;
+    width: 85%;
+    padding: 25px 30px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 15px;
+}
+
+#banking-main-container-right-progress-div-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#banking-main-container-right-progress-div-header-left {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#banking-main-container-right-progress-div-cost {
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
+
+#banking-main-container-right-progress-div-cost :nth-child(1) {
+    color: #5149E4;
+}
+
+#banking-right-container-text {
+    padding: 25px 0 25px 36px;
+    font-weight: 600;
+}
+
+#dash-contact-container-inside-header {
+    display: flex;
+    width: 70%;
+    justify-content: end;
+    /* align-items: center; */
+    gap: 2rem;
+}
+
+#dash-contact-container-inside-header > h2 {
+    padding-left: 60px;
+}

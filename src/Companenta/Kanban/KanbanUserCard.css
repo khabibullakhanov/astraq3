@@ -1,0 +1,64 @@
+#kanban-user-main-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2rem;
+}
+
+#kanbar-user-card-content {
+    display: flex;
+    flex-direction: column;
+    width: 23.5%;
+    background-color: #F9FAFF;
+    padding: 0 40px;
+    height: 260px;
+    margin-bottom: 50px;
+}
+
+#kanbar-user-card-content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -28px;
+}
+
+#kanbar-user-card-content-left-div {
+    background-color: #8A96B1;
+    height: 50px;
+    width: 50px;
+}
+
+
+#kanbar-user-card-content-left>p {
+    color: #8A96B1;
+}
+
+#kanbar-user-card-content-left>h3 {
+    font-weight: 600;
+}
+
+#kanbar-user-card-content-right-progress-text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#kanbar-user-card-content-right-icons {
+    display: flex;
+    gap: 1rem;
+    padding-top: 30px;
+}
+
+#kanbar-user-card-content-right > h2 {
+    float: right;
+    font-size: 25px;
+    font-weight: 600;
+}
+#kanbar-user-card-content-right > h2> * {
+    font-size: 20px;
+}
+
+#kanbar-user-card-content-right-icons p {
+    color: #8A96B1;
+}

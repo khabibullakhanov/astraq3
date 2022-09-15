@@ -1,0 +1,144 @@
+#ticketing-main-container {
+    display: flex;
+}
+
+
+
+#ticketing-main-container-left {
+    width: 65%;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#ticketing-main-container-right {
+    width: 35%;
+    /* height: 100%; */
+    background-color: #F9FAFF;
+}
+
+#blue-color {
+    font-size: 17px;
+    color: #5149E4;
+    font-weight: 600;
+}
+
+#tiketing-pagination-container {
+    background-color: #F9FAFF;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#calendar-inside {
+    display: flex;
+    gap: 2.7rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: white;
+    width: 85%;
+    margin: 0 auto;
+    padding: 10px 20px 30px 20px;
+}
+
+#calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-right: 20px;
+}
+
+#calendar-header :nth-child(1){
+    font-size: 28px;
+}
+#calendar-header :nth-child(3){
+    font-size: 28px;
+}
+
+#calendar-week-day {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.red-color {
+    font-weight: 600;
+}
+#red-color {
+    font-weight: 600;
+    color: red;
+}
+
+.today {
+    background-color: #5149E4;
+    padding: 5px 8px;
+    color: white;
+    margin: 0 -10px;
+}
+
+#yellow-color {
+    color: orange;
+    font-size: 15px;
+}
+
+#ticketing-todo-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    background-color: white;
+    /* padding: 10px 20px 10px 0; */
+    margin: 0 auto;
+    height: 120px;
+    padding-right: 20px;
+}
+
+#ticketing-todo-content-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#ticketing-todo-content-left-color-div {
+    width: 10px;
+    height: 120px;
+    background-color: #5149E4;
+}
+
+#ticketing-todo-content-right {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#grey-ticketing-div {
+    background-color: #8A96B1;
+    padding: 20px;
+}
+
+#color-ticketing-div {
+    background-color: #5149E4;
+    padding: 7px 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 19px;
+}
+
+#ticketing-right-container-text {
+    padding-block: 25px;
+    padding-left: 40px;
+}
+
+#ticketing-todo-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

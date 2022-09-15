@@ -1,0 +1,63 @@
+#dashboard-right-card-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#card-container {
+    background-color: white;
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#card-container>p {
+    text-align: left;
+    width: 90%;
+    line-height: 26px;
+    letter-spacing: 1.2px;
+    color: #8A96B1;
+    font-size: 17px;
+}
+
+#card-container-header {
+    display: flex;
+    gap: 2rem;
+}
+
+#card-container-header-box {
+    width: 60px;
+    height: 60px;
+    background-color: #8A96B1;
+}
+
+#card-container-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+#card-container-bottom {
+    display: flex;
+    gap: 2.5rem;
+}
+
+#card-container-bottom :nth-child(1) {
+    color: #FF5B5B;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#card-container-bottom :nth-child(2) {
+    color: #00A389;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#card-container-header-star {
+    display: flex;
+    align-items: center;
+}

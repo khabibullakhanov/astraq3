@@ -1,0 +1,81 @@
+#contact-user-main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#users-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding-bottom: 50px;
+}
+
+#user-main-content {
+    background-color: #F9FAFF;
+    width: 24%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#user-main-content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#user-main-content-grey-div {
+    height: 53px;
+    width: 55px;
+    background-color: #8A96B1;
+}
+
+#user-main-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+#user-main-content-text>p {
+    font-size: 13px;
+    color: #8A96B1;
+}
+
+#user-main-content-inside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#user-work {
+    display: flex;
+    gap: 1.5rem;
+}
+
+#user-work>img {
+    width: 20px;
+    height: 20px;
+}
+
+#user-phone {
+    display: flex;
+    gap: 1.5rem;
+}
+
+#user-phone a> img {
+    width: 20px;
+    height: 20px;
+}
+
+#user-email {
+    display: flex;
+    gap: 1.5rem;
+}
+
+#user-email  > img {
+    width: 20px;
+    height: 20px;
+}

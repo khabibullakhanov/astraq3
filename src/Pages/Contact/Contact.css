@@ -1,0 +1,47 @@
+input,select {
+    outline: none;
+}
+
+
+#contact-main-container {
+    width: 97%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#contact-header-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contact-header-part-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#contact-header-part-right select {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    outline: none;
+    font-size: 18px;
+    color: #8A96B1;
+}
+
+#contact-header-select-content {
+    background-color: #F9FAFF;
+    padding: 10px 25px;
+}
+
+#contact-header-part-right>button {
+    background-color: #5149E4;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 30px;
+}

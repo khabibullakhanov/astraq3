@@ -1,0 +1,141 @@
+#kanban-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-right: 50px;
+}
+
+#kanban-main-container-header-text > h1 {
+    padding-top: 20px;
+    margin-bottom: -5px;
+}
+
+#kanban-project-board-container {
+    display: flex;
+    border: 2px solid #ECEFF7;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 35px;
+}
+
+#kanban-project-board-container-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#kanban-project-board-container-left h2 {
+    font-weight: 600;
+}
+
+#kanban-star-content {
+    background-color: #ECEFF7;
+    padding: 1px 15px 10px 3px;
+}
+
+#kanban-star-content>button {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+#kanban-star-content>* {
+    width: 25px;
+    height: 25px;
+}
+
+#kanban-grey-div-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+#kanban-grey-div {
+    background-color: #8A96B1;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+}
+
+#kanban-purple-div {
+    background-color: #5149E4;
+    padding: 8px 15px;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+#kanban-invite-people-container {
+    background-color: #ECEFF7;
+}
+
+#kanban-invite-people-container>button {
+    padding: 8px 20px;
+    background: none;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#kanban-invite-people-container>button p {
+    color: #8A96B1;
+}
+
+#kanban-private-content {
+    border: 1px solid #ECEFF7;
+
+}
+
+#kanban-private-content>button {
+    padding: 8px 20px;
+    background: none;
+    color: #8A96B1;
+    outline: none;
+    border: none;
+}
+
+#kanban-edite-content {
+    background-color: #ECEFF7;
+    padding: 8px 20px;
+}
+
+#kanban-edite-content>button {
+    background: none;
+    outline: none;
+    border: none;
+    color: #8A96B1;
+}
+
+#kanban-project-board-container-right {
+    background-color: #5149E4;
+    padding: 8px 20px;
+
+}
+
+#kanban-project-board-container-right > button {
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#kanban-project-board-container-right > button > span {
+    font-size: 18px;
+}
+
+#kanban-save-content {
+    background-color: rgb(34, 172, 34);
+    padding: 8px 15px;
+}
+
+#kanban-save-content > button {
+    background: none;
+    outline: none;
+    color: white;
+    border: none;
+}

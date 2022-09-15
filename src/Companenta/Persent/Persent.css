@@ -1,0 +1,57 @@
+#persent-card {
+    text-align: center;
+    background-color: white;
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: -25px;
+    height: 42vh;
+}
+
+#persent-card h2 {
+    text-align: left;
+    padding-left: 30px;
+    padding-bottom: 25px;
+}
+
+#speed {
+    display: flex;
+    justify-content: center;
+}
+
+#country-name {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    gap: 2rem;
+}
+
+#country-name div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#country-name p {
+    color: #8A96B1;
+}
+
+#present-text {
+    position: relative;
+    top: -70px;
+}
+
+#present-text > h1 {
+    color: #5149E4;
+    font-size: 40px;
+}
+
+#present-text > span {
+    padding-top: 20px;
+}
+
+#present-text > span > p {
+    color: #5149E4;
+    font-weight: 600;
+}
