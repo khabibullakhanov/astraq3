@@ -11,13 +11,14 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import SendIcon from "@mui/icons-material/Send";
 import { Checkbox } from "@mui/material";
 import searchIcon from "../../Assets/Icons/Search.svg";
-import { DashboardRightUsers } from "../../Companenta/Data/DashboardRightUsers";
 import { DashboardContacts } from "../Data/DashboardContacts";
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 export function Header() {
   const ref1 = useRef();
   const [see, setSee] = useState(false);
-  const [users, setUsers] = useState([]);
+  // const [user, setUser] = useState([]);
   const [sendIcon, setSendIcon] = useState(false);
   const [message, setMessage] = useState([]);
   const [search, setSearch] = useState("");
@@ -30,6 +31,7 @@ export function Header() {
     setSee(false);
     localStorage.setItem("xabarlar", JSON.stringify([...cart, message]));
   };
+
 
   // const filtered = contacts.filter((value) => {
   //     if (search === "") {
@@ -67,8 +69,9 @@ export function Header() {
             setSearch(event.target.value);
           }}
         />
+      
       </form>
-      {}
+      { }
 
       <div id="header-container-right">
         <Link to="/">

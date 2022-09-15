@@ -40,11 +40,16 @@ import yellowStar from "../../Assets/Icons/Yellow Star.svg"
 import { Checkbox } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
 
 
 
 export function Email() {
+    const emailUsers = useSelector((state) => state.crud);
+    const dispatch = useDispatch();
+
     const ref1 = useRef(null)
     const ref2 = useRef(null);
     const ref3 = useRef(null);
@@ -90,19 +95,22 @@ export function Email() {
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = user.slice(firstPostIndex, lastPostIndex);
 
-    const carts = JSON.parse(localStorage.getItem("emailContact") || "[]")
 
     const addNewContact = (e) => {
         e.preventDefault();
-        localStorage.setItem("emailContact", JSON.stringify([...carts, newContact]))
         setModalOpen(false)
-        enqueueSnackbar("Contact successfully saved", {
-            autoHideDuration: "2000",
-            variant: "success",
-        });
-    }
+        const NowDate = new Date().getTime()
+        const newUser = {
+            id: NowDate,
+            name: e.target.name.value,
+            job: e.target.job.value,
+        };
 
-    const newCurrentUser = carts
+        dispatch(acAddCrud(newUser))
+        e.target.name.value = ""
+        e.target.job.value = ""
+
+    }
 
     return (
         <div id='email-main-container'>
@@ -113,8 +121,8 @@ export function Email() {
                         <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                        <TextField ref={ref2} label="Type name..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField ref={ref3} label="Type job..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, text: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField ref={ref2} required label="Type name..." name='name' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField ref={ref3} required label="Type job..." name='job' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, text: e.target.value }) }} placeholder="Contact job..." />
                         <button type='submit'>
                             Add Contact
                         </button>
@@ -195,10 +203,10 @@ export function Email() {
                         </div>
                         <div id="email-main-container-left-inside-right-userlar">
                             <EmailItem
-                                users={newCurrentUser}
+                                users={emailUsers}
                             />
                             <EmailPagination
-                                totalPosts={user.length}
+                                totalPosts={emailUsers.length}
                                 setCurrentPage={setCurrentPage}
                                 postsPerPage={postsPerPage}
                                 currentPage={currentPage}

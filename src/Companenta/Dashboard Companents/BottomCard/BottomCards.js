@@ -6,9 +6,17 @@ import doubleTrue from "../../../Assets/Icons/Pink Double True.svg"
 // import { DashboardContacts } from "../../Data/DashboardContacts"
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
+import EditIcon from '@mui/icons-material/Edit';
 
+
+// import NumberFormat from 'react-number-format';
 export function BottomCards() {
+
+    const dispatch = useDispatch();
+    const dashUser = useSelector((state) => state.crud);
     const { enqueueSnackbar } = useSnackbar()
     const ref1 = useRef(null);
     const ref2 = useRef(null);
@@ -17,37 +25,33 @@ export function BottomCards() {
     const [contacts, setContacts] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
+    const [value, setValue] = useState([])
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(dashUser));
+    }, [dashUser]);
 
-    // useEffect(() => {
-    //     DashboardContacts()
-    //         .then((data) => {
-    //             setContacts(data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }, []);
+
     const cart = JSON.parse(localStorage.getItem("yangiContacts") || "[]")
     localStorage.setItem("yangiContactsLength", JSON.stringify(contacts.length))
     const addNewContact = (e) => {
-        setContacts(cart)
         e.preventDefault();
         setModalOpen(false)
-        localStorage.setItem("yangiContacts", JSON.stringify([...cart, newContact]))
-        ref1.current.value = '';
-        ref2.current.value = '';
-        ref3.current.value = '';
-        ref4.current.value = '';
-        enqueueSnackbar("Contact successfully saved", {
-            autoHideDuration: "2000",
-            variant: "success",
-        });
+        const NowDate = new Date().getTime()
+        const newUser = {
+            id: NowDate,
+            name: e.target.name.value,
+            job: e.target.job.value,
+            message: e.target.message.value,
+        };
+
+        dispatch(acAddCrud(newUser))
+        e.target.name.value = ""
+        e.target.job.value = ""
+        e.target.message.value = ""
     }
-    // localStorage.setItem('yangiContacts', JSON.stringify(alone))
-    // const yangiContactlar = JSON.parse(localStorage.getItem("yangiContacts"))
 
 
-    const contactLength = contacts.length
+    const contactLength = dashUser.length
 
     return (
         <div>
@@ -70,18 +74,45 @@ export function BottomCards() {
                                 <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                             </div>
                             <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                                <TextField ref={ref1} label="Type name..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
-                                <TextField ref={ref2} label="Type job..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, job: e.target.value }) }} placeholder="Contact job..." />
-                                <TextField ref={ref3} type="number" label="Type number..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, number: e.target.value }) }} placeholder="Phone number..." />
-                                <TextField ref={ref4} label="Type message..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, message: e.target.value }) }} placeholder="Text..." />
-                                <button type='submit'>
-                                    Add Contact
-                                </button>
+                                <TextField id="outlined-basic" label="Name..." variant="outlined"
+                                    name="name"
+                                    required
+                                    autoComplete="off"
+                                    onClick={() => {
+                                        if (dashUser.name !== "") {
+                                            console.log(dashUser.name);
+                                        } else {
+                                            alert("feadc");
+                                        }
+                                    }}
+                                    onChange={(e) => { setValue({ ...value, name: e.target.value }) }}
+                                />
+                                <TextField
+                                required
+                                    id="outlinedbasc"
+                                    label="Username..."
+                                    variant="outlined"
+                                    name="job"
+                                    autoComplete="off"
+                                    onChange={(e) => { setValue({ ...value, job: e.target.value }) }}
+                                />
+                                <input
+                                required
+                                    name="message"
+                                    autoComplete="off"
+                                    format="+998 (##) ### ####"
+                                    placeholder="+998 (##) ### ####"
+                                    thousandSeparator={true}
+                                    onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
+                                />
+
+                                <button
+                                    type="submit">Add</button>
                             </form>
                         </div>
                     </div>
                     <div id='bottom-contact-container-main'>
-                        {contacts.map((contact, index) => {
+                        {dashUser.map((contact, index) => {
                             return (
                                 <div
                                     id='bottom-contact-container-user'>
@@ -105,8 +136,24 @@ export function BottomCards() {
                                         <div id='bottom-contact-container-user-right-second'>
                                             <img src={message} alt="" />
                                         </div>
-                                        <div id='bottom-contact-container-user-right-third'>
+                                        <div onClick={() => {
+                                            dispatch(acDeleteCrud(contact.id))
+                                            enqueueSnackbar(`${contact.name} successfully deleted`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                        }} id='bottom-contact-container-user-right-third'>
                                             <DeleteIcon />
+                                        </div>
+                                        <div onClick={() => {
+                                            dispatch(acUpdateCrud(contact))
+                                            enqueueSnackbar(`${contact.name} successfully edited`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                            setValue(contact)
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <EditIcon />
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +172,7 @@ export function BottomCards() {
                             <a href=''>View All</a>
                         </div>
                     </div>
-                    {contacts.map((contact) => {
+                    {dashUser.map((contact) => {
                         return (
                             <div id='bottom-message-container-main'>
                                 <div id="bottom-contact-container-user">
@@ -137,8 +184,29 @@ export function BottomCards() {
                                             <p>{contact.message}</p>
                                         </div>
                                     </div>
+                                    <div id='bottom-contact-container-user-right'>
                                     <div id='bottom-message-container-main-user-right'>
                                         <button>46</button>
+                                    </div>
+                                    <div onClick={() => {
+                                            dispatch(acDeleteCrud(contact.id))
+                                            enqueueSnackbar(`${contact.name} successfully deleted`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <DeleteIcon />
+                                        </div>
+                                        <div onClick={() => {
+                                            dispatch(acUpdateCrud(contact))
+                                            enqueueSnackbar(`${contact.name} successfully edited`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                            setValue(contact)
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <EditIcon />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
