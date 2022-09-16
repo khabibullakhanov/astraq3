@@ -17,18 +17,23 @@ import blueRectangle from "../../Assets/Icons/Siyohrang Tortburchak.svg"
 import uchNuqta from "../../Assets/Icons/3 nuqta.svg"
 import malumotlar from "./BankinfUsers.txt"
 import TextField from '@mui/material/TextField';
+import ClearIcon from '@mui/icons-material/Clear';
 import { useSnackbar } from 'notistack'
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+
 
 export function Banking() {
+    const dispatch = useDispatch();
+    const bankingUsers = useSelector((state) => state.crud);
+
     const { enqueueSnackbar } = useSnackbar()
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setpostsPerPage] = useState(8)
     const [modalOpen, setModalOpen] = useState(false)
     const [cards, setCards] = useState([])
-    const ref1 = useRef(null);
-    const ref2 = useRef(null);
-    const ref3 = useRef(null);
+
     useEffect(() => {
         BnkingData()
             .then((data) => {
@@ -38,6 +43,9 @@ export function Banking() {
                 console.log(err);
             })
     }, [])
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(bankingUsers));
+    }, [bankingUsers]);
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
@@ -48,10 +56,15 @@ export function Banking() {
     const submitCards = (e) => {
         e.preventDefault();
         setModalOpen(false)
-        localStorage.setItem("yangiCardlar", JSON.stringify([...cart, cards]))
-        ref1.current.value = '';
-        ref2.current.value = '';
-        ref3.current.value = '';
+        const NowDate = new Date().getTime()
+        const newBankingUser = {
+            bankingUserId: NowDate,
+            bankingUserName: e.target.name.value,
+        };
+
+        dispatch(acAddCrud(newBankingUser))
+        e.target.name.value = ""
+
         enqueueSnackbar("User successfully added", {
             autoHideDuration: "2000",
             variant: "success",
@@ -162,11 +175,13 @@ export function Banking() {
                         <div id='banking-main-container-right-transfer-container-inside'>
                             <div id='banking-main-container-right-transfer-container-inside-divs-container'>
                                 {
-                                    cart.map((item, index) => {
+                                    bankingUsers.map((item, index) => {
                                         return (
                                             <div id='banking-right-grey-div'>
-                                                <div id='banking-right-grey-background'></div>
-                                                <h6 id='font-weight-600'>{item.name}</h6>
+                                                <div id='banking-right-grey-background'><ClearIcon onClick={() => {
+                                                    dispatch(acUpdateCrud(item.bankingUserId))
+                                                }} id="bankingEdite" /></div>
+                                                <h6 id='font-weight-600'>{item.bankingUserName}</h6>
                                             </div>
                                         )
                                     })
@@ -182,9 +197,7 @@ export function Banking() {
                                             <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                                         </div>
                                         <form id='dash-contact-modal-form' onSubmit={submitCards}>
-                                            <TextField required ref={ref1} label="Type name..." variant="outlined" onChange={(e) => { setCards({ ...cards, name: e.target.value }) }} placeholder="Contact name..." />
-                                            <TextField required ref={ref2} label="Type job..." variant="outlined" onChange={(e) => { setCards({ ...cards, job: e.target.value }) }} placeholder="Contact job..." />
-                                            <TextField required ref={ref3} label="Type phone..." variant="outlined" onChange={(e) => { setCards({ ...cards, phone: e.target.value }) }} placeholder="Contact job..." />
+                                            <TextField required name='name' label="Type name..." variant="outlined" onChange={(e) => { setCards({ ...cards, name: e.target.value }) }} placeholder="Contact name..." />
                                             <button type='submit'>
                                                 Add User
                                             </button>

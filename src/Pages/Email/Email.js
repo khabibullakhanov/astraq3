@@ -48,11 +48,8 @@ import { useSnackbar } from 'notistack'
 
 export function Email() {
     const emailUsers = useSelector((state) => state.crud);
+    const emailMessages = useSelector((state) => state.crud);
     const dispatch = useDispatch();
-
-    const ref1 = useRef(null)
-    const ref2 = useRef(null);
-    const ref3 = useRef(null);
     const { enqueueSnackbar } = useSnackbar()
     const [user, setUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
@@ -69,23 +66,25 @@ export function Email() {
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
 
+    const submitXabar = (e) => {
+        e.preventDefault();
+        const hozir = new Date().getTime()
+        const newEmailMessages = {
+            newEmailMessagesId: hozir,
+            emailLeftMes: e.target.mes.value,
+        };
 
-    // useEffect(() => {
-    //     EmailUsers()
-    //         .then((data) => {
-    //             setUser(data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }, [])
-
-    const cart = JSON.parse(localStorage.getItem("submitXabar") || "[]")
-
-    const submitXabar = () => {
-        localStorage.setItem('submitXabar', JSON.stringify([...cart, message]))
-        ref1.current.value = ""
+        dispatch(acAddCrud(newEmailMessages))
+        e.target.name.value = ""
     }
+
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(emailUsers));
+    }, [emailUsers]);
+
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(emailMessages));
+    }, [emailMessages]);
 
     const handleSelect = () => {
 
@@ -99,14 +98,14 @@ export function Email() {
     const addNewContact = (e) => {
         e.preventDefault();
         setModalOpen(false)
-        const NowDate = new Date().getTime()
-        const newUser = {
-            id: NowDate,
-            name: e.target.name.value,
-            job: e.target.job.value,
+        const hoz = new Date().getTime()
+        const newEmailContacts = {
+            newEmailContactsId: hoz,
+            emailContactName: e.target.name.value,
+            emailContactJob: e.target.job.value,
         };
 
-        dispatch(acAddCrud(newUser))
+        dispatch(acAddCrud(newEmailContacts))
         e.target.name.value = ""
         e.target.job.value = ""
 
@@ -121,8 +120,8 @@ export function Email() {
                         <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                        <TextField ref={ref2} required label="Type name..." name='name' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField ref={ref3} required label="Type job..." name='job' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, text: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField required label="Type name..." name='name' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required label="Type job..." name='job' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, text: e.target.value }) }} placeholder="Contact job..." />
                         <button type='submit'>
                             Add Contact
                         </button>
@@ -287,16 +286,16 @@ export function Email() {
                             </div>
                         </div>
                     </div>
-                    {cart.map((item, index) => {
+                    {emailMessages.map((item, index) => {
                         return (
                             <div id="email-xabar-div">
-                                <h6>{item.xabar}</h6>
+                                <h6>{item.mes}</h6>
                             </div>
                         )
                     })}
                     <form onSubmit={submitXabar}>
                         <div id='email-main-container-right-message-container'>
-                            <input ref={ref1} type="text" onChange={(e) => { setMessage({ ...message, xabar: e.target.value }) }} />
+                            <input name='mes' type="text" onChange={(e) => { setMessage({ ...message, xabar: e.target.value }) }} />
                             <div id='email-main-container-right-message-container-bottom'>
                                 <div id='email-main-container-right-message-container-bottom-left'>
                                     <img src={betta} alt="" />

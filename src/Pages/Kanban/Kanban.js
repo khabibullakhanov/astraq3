@@ -15,46 +15,49 @@ import yellowStar from "../../Assets/Icons/Yellow Star.svg"
 import { Checkbox } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
 
 
 export function Kanban() {
+    const dispatch = useDispatch();
+    const kanbanUsers = useSelector((state) => state.crud);
     const { enqueueSnackbar } = useSnackbar()
     const [modalOpen, setModalOpen] = useState(false)
     const [user, setUser] = useState([]);
     const [newProject, setNewProject] = useState([])
     const [deleteItems, setDeleteItems] = useState(false)
     const [remove, setRemove] = useState(false)
-    const ref1 = useRef(null);
-    const ref2 = useRef(null);
-    const ref3 = useRef(null);
-    const ref4 = useRef(null);
-    const ref5 = useRef(null);
-    const ref6 = useRef(null);
-    const ref7 = useRef(null);
 
     useEffect(() => {
-        KanbanUsersData()
-            .then((data) => {
-                setUser(data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
+        localStorage.setItem("users", JSON.stringify(kanbanUsers));
+    }, [kanbanUsers]);
 
     const cart = JSON.parse(localStorage.getItem("yangiProjekt") || "[]")
     localStorage.setItem("yangiProjektLength", JSON.stringify(user.length))
     const addNewContact = (e) => {
         e.preventDefault();
         setModalOpen(false)
-        localStorage.setItem("yangiProjekt", JSON.stringify([...cart, newProject]))
-        ref1.current.value = '';
-        ref2.current.value = '';
-        ref3.current.value = '';
-        ref4.current.value = '';
-        ref5.current.value = '';
-        ref6.current.value = '';
-        ref7.current.value = '';
+        const NowDate = new Date().getTime()
+        const newKanban = {
+            kanbanId: NowDate,
+            kanbanName: e.target.name.value,
+            kanbanWork: e.target.work.value,
+            kanbanProgress: e.target.progress.value,
+            kanbanTeam: e.target.team.value,
+            kanbanProject: e.target.project.value,
+            kanbanMessage: e.target.message.value,
+            kanbanColor: e.target.color.value,
+        }
+
+        dispatch(acAddCrud(newKanban))
+        e.target.name.value = ""
+        e.target.work.value = ""
+        e.target.progress.value = ""
+        e.target.team.value = ""
+        e.target.project.value = ""
+        e.target.message.value = ""
+        e.target.color.value = ""
         enqueueSnackbar("Project successfully saved", {
             autoHideDuration: "2000",
             variant: "success",
@@ -90,8 +93,8 @@ export function Kanban() {
 
     const deleteItemKanban = () => {
         setRemove(true)
-    //    const newList = yangiProjects.filter((l) => l.id !)
-    } 
+        //    const newList = yangiProjects.filter((l) => l.id !)
+    }
 
     return (
         <div id='kanban-main-container'>
@@ -150,13 +153,13 @@ export function Kanban() {
                         <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                        <TextField required ref={ref1} label="Type name..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField required ref={ref2} label="Type job..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, work: e.target.value }) }} placeholder="Contact job..." />
-                        <TextField required ref={ref3} type="number" label="Type progress percent..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, progressLength: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required ref={ref4} type="text" label="Type team members..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, team: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required ref={ref5} type="number" label="Type projects..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, skripka: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required ref={ref6} label="Type message..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, message: e.target.value }) }} placeholder="Text..." />
-                        <TextField required ref={ref7} type="color" label="Choose color..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, color: e.target.value }) }} placeholder="Text..." />
+                        <TextField required name='name' label="Type name..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, name: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required name='work' label="Type job..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, work: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField required name='progress' type="number" label="Type progress percent..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, progressLength: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required name='team' type="text" label="Type team members..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, team: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required name='project' type="number" label="Type projects..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, skripka: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required name='message' label="Type message..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, message: e.target.value }) }} placeholder="Text..." />
+                        <TextField required name='color' type="color" label="Choose color..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, color: e.target.value }) }} placeholder="Text..." />
                         <button type='submit'>
                             Add Contact
                         </button>
@@ -166,22 +169,22 @@ export function Kanban() {
             <div>
                 <KanbanNavbar />
                 <div id='kanban-user-main-container'>
-                    {yangiProjects.map((item, index) => {
-                        const colors = item.color
-                        const width = item.progressLength + "%"
+                    {kanbanUsers.map((item, index) => {
+                        const colors = item.kanbanColor
+                        const width = item.kanbanProgress + "%"
                         console.log(colors);
                         return (
-                            <div style={remove ?{ display: "none"}:{display: "block" }} id='kanbar-user-card-content'>
+                            <div style={remove ? { display: "none" } : { display: "block" }} id='kanbar-user-card-content'>
                                 <div id='kanbar-user-card-content-left'>
                                     <div id='kanbar-user-card-content-left-div'>
                                     </div>
-                                    <h3>{item.name}</h3>
-                                    <p>{item.work}</p>
+                                    <h3>{item.kanbanName}</h3>
+                                    <p>{item.kanbanWork}</p>
                                 </div>
                                 <div id='kanbar-user-card-content-right'>
                                     <div id='kanbar-user-card-content-right-progress-text'>
                                         <p>Progress</p>
-                                        <p>{item.progressLength}</p>
+                                        <p>{item.kanbanProgress}</p>
                                     </div>
                                     <div className="w3-light-grey w3-round-xlarge">
                                         <div className="w3-container w3-round-xlarge" style={{
@@ -190,13 +193,13 @@ export function Kanban() {
                                     </div>
                                     <div id='kanbar-user-card-content-right-icons'>
                                         <img src={team} alt="" />
-                                        <p>{item.team}</p>
+                                        <p>{item.kanbanTeam}</p>
                                         <img src={skripka} alt="" />
-                                        <p>{item.skripka}</p>
+                                        <p>{item.kanbanProject}</p>
                                         <img src={chatLogo} alt="" />
-                                        <p>{item.message}</p>
+                                        <p>{item.kanbanMessage}</p>
                                     </div>
-                                    <h2 onClick={deleteItemKanban} style={deleteItems ? { display: "block" } : { display: "none" }}><ClearIcon /></h2>
+                                    <h2 onClick={() => { dispatch(acDeleteCrud(item.id)) }} style={deleteItems ? { display: "block" } : { display: "none" }}><ClearIcon /></h2>
                                 </div>
                             </div>
                         )

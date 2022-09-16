@@ -18,10 +18,6 @@ export function BottomCards() {
     const dispatch = useDispatch();
     const dashUser = useSelector((state) => state.crud);
     const { enqueueSnackbar } = useSnackbar()
-    const ref1 = useRef(null);
-    const ref2 = useRef(null);
-    const ref3 = useRef(null);
-    const ref4 = useRef(null);
     const [contacts, setContacts] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
@@ -31,7 +27,6 @@ export function BottomCards() {
     }, [dashUser]);
 
 
-    const cart = JSON.parse(localStorage.getItem("yangiContacts") || "[]")
     localStorage.setItem("yangiContactsLength", JSON.stringify(contacts.length))
     const addNewContact = (e) => {
         e.preventDefault();

@@ -208,6 +208,19 @@
     background-color: #8A96B1;
     width: 45px;
     height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+
+#banking-right-grey-background:hover #bankingEdite {
+    display: block;
+}
+
+#banking-right-grey-background>#bankingEdite{
+    display: none;
 }
 
 #bankingright-blue-button-div {
@@ -300,6 +313,6 @@
     gap: 2rem;
 }
 
-#dash-contact-container-inside-header > h2 {
+#dash-contact-container-inside-header>h2 {
     padding-left: 60px;
 }

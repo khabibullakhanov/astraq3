@@ -19,16 +19,7 @@ export function Contact() {
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setpostsPerPage] = useState(12)
 
-    useEffect(() => {
-        ContactData()
-            .then((data) => {
-                setUser(data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
-    localStorage.setItem("newKantaktLength", JSON.stringify(user.length))
+
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;

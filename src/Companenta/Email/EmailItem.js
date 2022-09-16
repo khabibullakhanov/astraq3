@@ -27,7 +27,7 @@ export function EmailItem({ users }) {
                         <div id='email-main-container-left-inside-right-card-item-left'></div>
                         <div id='email-main-container-left-inside-right-card-item-right'>
                             <div>
-                                <h3 id='font-weight-600'>{item.name}</h3>
+                                <h3 id='font-weight-600'>{item.emailContactName}</h3>
                                 <p id='email-main-container-left-inside-right-card-item-right-text'>{item.job}</p>
                             </div>
                             <div id='email-main-container-left-inside-right-card-item-right-bottom'>
@@ -35,15 +35,15 @@ export function EmailItem({ users }) {
                                 <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
                                     <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
                                     <DeleteIcon style={{ color: "grey" }} onClick={() => {
-                                        dispatch(acDeleteCrud(item.id))
-                                        enqueueSnackbar(`${item.name} successfully deleted`, {
+                                        dispatch(acDeleteCrud(item.newEmailContactsId))
+                                        enqueueSnackbar(`${item.emailContactName} successfully deleted`, {
                                             autoHideDuration: "2000",
                                             variant: "success",
                                         });
                                     }} />
                                     <EditIcon style={{ color: "grey" }} onClick={() => {
-                                        dispatch(acUpdateCrud(item.name))
-                                        enqueueSnackbar(`${item.name} successfully edited`, {
+                                        dispatch(acUpdateCrud(item.emailContactName))
+                                        enqueueSnackbar(`${item.emailContactName} successfully edited`, {
                                             autoHideDuration: "2000",
                                             variant: "success",
                                         });
