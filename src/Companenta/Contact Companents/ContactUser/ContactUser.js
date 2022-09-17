@@ -11,16 +11,23 @@ import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
-
+import { useSnackbar } from 'notistack'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
 
 
 export function ContactUser() {
+    const { enqueueSnackbar } = useSnackbar();
     const contacts = useSelector((state) => state.crud);
     const dispatch = useDispatch();
 
     const [row, setRow] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
+
     const rowTodo = () => {
         setRow(true)
     }
@@ -31,24 +38,29 @@ export function ContactUser() {
 
     const addNewContact = (e) => {
         e.preventDefault();
-        setModalOpen(false)
-        const NowDate = new Date().getTime()
-        const newContacts = {
-            contactsId: NowDate,
-            contactsName: e.target.name.value,
-            contactsWork: e.target.work.value,
-            contactsCompany: e.target.company.value,
-            contactsPhone: e.target.phone.value,
-            contactsMessage: e.target.email.value,
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const hozirgi = new Date().getTime()
+            const newContacts = {
+                id: hozirgi,
+                contactsName: e.target.name.value,
+                contactsWork: e.target.work.value,
+                contactsCompany: e.target.company.value,
+                contactsPhone: e.target.phone.value,
+                contactsMessage: e.target.email.value,
+            }
+            dispatch(acAddCrud(newContacts))
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            enqueueSnackbar(`${value.name} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
         }
+        setValue({ contactsName: "", contactsWork: "", contactsCompany: "", contactsPhone: "", contactsMessage: "", })
 
-
-        dispatch(acAddCrud(newContacts))
-        e.target.name.value = ""
-        e.target.work.value = ""
-        e.target.company.value = ""
-        e.target.phone.value = ""
-        e.target.email.value = ""
     }
 
 
@@ -84,13 +96,13 @@ export function ContactUser() {
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
                         {/* <input ref={ref1} type="text" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." /> */}
-                        <TextField required name='name' label="Type name..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField required name='work' label="Type job..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, work: e.target.value }) }} placeholder="Contact job..." />
-                        <TextField required name='company' label="Type company..." variant='outlined' onChange={(e) => { setNewContact({ ...newContact, company: e.target.value }) }} placeholder="Contact company..." />
-                        <TextField required name='phone' label="Type phone..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, phone: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required name='email' label="Type email..." variant="outlined" onChange={(e) => { setNewContact({ ...newContact, email: e.target.value }) }} placeholder="Contact email..." />
+                        <TextField required value={value.contactsName} name='name' label="Type name..." variant="outlined" onChange={(e) => { setValue({ ...value, contactsName: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required value={value.contactsWork} name='work' label="Type job..." variant="outlined" onChange={(e) => { setValue({ ...value, contactsWork: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField required value={value.contactsCompany} name='company' label="Type company..." variant='outlined' onChange={(e) => { setValue({ ...value, contactsCompany: e.target.value }) }} placeholder="Contact company..." />
+                        <TextField required value={value.contactsPhone} name='phone' label="Type phone..." variant="outlined" onChange={(e) => { setValue({ ...value, contactsPhone: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required value={value.contactsMessage} name='email' label="Type email..." variant="outlined" onChange={(e) => { setValue({ ...value, contactsMessage: e.target.value }) }} placeholder="Contact email..." />
                         <button type='submit'>
-                            Add Contact
+                            {typeHendelSubmit}
                         </button>
                     </form>
                 </div>
@@ -126,6 +138,34 @@ export function ContactUser() {
                                 <div id="user-email">
                                     <img src={message} alt="" />
                                     <span>{item.contactsMessage}</span>
+                                </div>
+                                <div style={{ display: "flex", marginLeft: "-10px" }}>
+                                    <div id="user-email">
+                                        <IconButton>
+                                            <DeleteIcon
+                                                onClick={() => {
+                                                    dispatch(acDeleteCrud(item.id))
+                                                    enqueueSnackbar(`${item.contactsName} successfully deleted`, {
+                                                        autoHideDuration: "2000",
+                                                        variant: "success",
+                                                    });
+                                                }}
+                                            />
+                                        </IconButton>
+                                        <span>{item.contactsMessage}</span>
+                                    </div>
+                                    <div id="user-email">
+                                        <IconButton
+                                            onClick={() => {
+                                                setValue(item)
+                                                setModalOpen(true);
+                                                setTypeHendelSubmit("Edit");
+                                            }}
+                                        >
+                                            <EditIcon style={{ color: "#5149E4", fontSize: "25px" }} />
+                                        </IconButton>
+                                        <span>{item.contactsMessage}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

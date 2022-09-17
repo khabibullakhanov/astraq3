@@ -53,6 +53,7 @@ export function BottomCards() {
         setValue({name:"", job: "", message:"",})
     }
 
+    
 
     const contactLength = dashUser.length
 

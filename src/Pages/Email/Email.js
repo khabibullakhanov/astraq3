@@ -40,6 +40,9 @@ import yellowStar from "../../Assets/Icons/Yellow Star.svg"
 import { Checkbox } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
+import greyStar from "../../Assets/Icons/Grey Star.svg"
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
@@ -65,9 +68,12 @@ export function Email() {
     const [message, setMessage] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
     const submitXabar = (e) => {
         e.preventDefault();
+
         const hozir = new Date().getTime()
         const newEmailMessages = {
             newEmailMessagesId: hozir,
@@ -97,19 +103,34 @@ export function Email() {
 
     const addNewContact = (e) => {
         e.preventDefault();
-        setModalOpen(false)
-        const hoz = new Date().getTime()
-        const newEmailContacts = {
-            newEmailContactsId: hoz,
-            emailContactName: e.target.name.value,
-            emailContactJob: e.target.job.value,
-        };
-
-        dispatch(acAddCrud(newEmailContacts))
-        e.target.name.value = ""
-        e.target.job.value = ""
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const hoz = new Date().getTime()
+            const newEmailContacts = {
+                newEmailContactsId: hoz,
+                emailContactName: e.target.name.value,
+                emailContactJob: e.target.job.value,
+            };
+            
+            dispatch(acAddCrud(newEmailContacts))
+            enqueueSnackbar(`${value.emailContactName} successfully added`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            enqueueSnackbar(`${value.emailContactName} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
+        setValue({ emailContactName: "", emailContactJob: "", })
 
     }
+    const y = new Date()
+    const hour = y.getMinutes()
 
     return (
         <div id='email-main-container'>
@@ -120,10 +141,10 @@ export function Email() {
                         <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                        <TextField required label="Type name..." name='name' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField required label="Type job..." name='job' variant="outlined" onChange={(e) => { setNewContact({ ...newContact, text: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField required value={value.emailContactName} label="Type name..." name='name' variant="outlined" onChange={(e) => { setValue({ ...value, emailContactName: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required value={value.emailContactJob} label="Type job..." name='job' variant="outlined" onChange={(e) => { setValue({ ...value, emailContactJob: e.target.value }) }} placeholder="Contact job..." />
                         <button type='submit'>
-                            Add Contact
+                            {typeHendelSubmit}
                         </button>
                     </form>
                 </div>
@@ -201,15 +222,45 @@ export function Email() {
                             </div>
                         </div>
                         <div id="email-main-container-left-inside-right-userlar">
-                            <EmailItem
-                                users={emailUsers}
-                            />
-                            <EmailPagination
+                            <div id='emailItem-main-container'>
+                                {emailUsers.map((item, index) => {
+                                    return (
+                                        <div id='email-main-container-left-inside-right-card-item'>
+                                            <div id='email-main-container-left-inside-right-card-item-left'></div>
+                                            <div id='email-main-container-left-inside-right-card-item-right'>
+                                                <div>
+                                                    <h3 id='font-weight-600'>{item.emailContactName}</h3>
+                                                    <p id='email-main-container-left-inside-right-card-item-right-text'>{item.emailContactJob}</p>
+                                                </div>
+                                                <div id='email-main-container-left-inside-right-card-item-right-bottom'>
+                                                    <p id='grey-color'>{hour} min ago</p>
+                                                    <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
+                                                        <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
+                                                        <DeleteIcon style={{ color: "grey" }} onClick={() => {
+                                                            dispatch(acDeleteCrud(item.newEmailContactsId))
+                                                            enqueueSnackbar(`${item.emailContactName} successfully deleted`, {
+                                                                autoHideDuration: "2000",
+                                                                variant: "success",
+                                                            });
+                                                        }} />
+                                                        <EditIcon style={{ color: "grey" }} onClick={() => {
+                                                            setValue(item)
+                                                            setModalOpen(true)
+                                                            setTypeHendelSubmit("Edit");
+                                                        }} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            {/* <EmailPagination
                                 totalPosts={emailUsers.length}
                                 setCurrentPage={setCurrentPage}
                                 postsPerPage={postsPerPage}
                                 currentPage={currentPage}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
