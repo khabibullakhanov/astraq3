@@ -22,6 +22,7 @@ export function BottomCards() {
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
     const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
     useEffect(() => {
         localStorage.setItem("users", JSON.stringify(dashUser));
     }, [dashUser]);
@@ -30,19 +31,26 @@ export function BottomCards() {
     localStorage.setItem("yangiContactsLength", JSON.stringify(contacts.length))
     const addNewContact = (e) => {
         e.preventDefault();
-        setModalOpen(false)
-        const NowDate = new Date().getTime()
-        const newUser = {
-            id: NowDate,
-            name: e.target.name.value,
-            job: e.target.job.value,
-            message: e.target.message.value,
-        };
-
-        dispatch(acAddCrud(newUser))
-        e.target.name.value = ""
-        e.target.job.value = ""
-        e.target.message.value = ""
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const NowDate = new Date().getTime()
+            const newUser = {
+                id: NowDate,
+                name: e.target.name.value,
+                job: e.target.job.value,
+                message: e.target.message.value,
+            };
+            dispatch(acAddCrud(newUser))
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            enqueueSnackbar(`${value.name} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
+        setValue({name:"", job: "", message:"",})
     }
 
 
@@ -80,6 +88,7 @@ export function BottomCards() {
                                             alert("feadc");
                                         }
                                     }}
+                                    value={value.name}
                                     onChange={(e) => { setValue({ ...value, name: e.target.value }) }}
                                 />
                                 <TextField
@@ -89,6 +98,7 @@ export function BottomCards() {
                                     variant="outlined"
                                     name="job"
                                     autoComplete="off"
+                                    value={value.job}
                                     onChange={(e) => { setValue({ ...value, job: e.target.value }) }}
                                 />
                                 <input
@@ -98,11 +108,12 @@ export function BottomCards() {
                                     format="+998 (##) ### ####"
                                     placeholder="+998 (##) ### ####"
                                     thousandSeparator={true}
+                                    value={value.message}
                                     onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
                                 />
 
                                 <button
-                                    type="submit">Add</button>
+                                    type="submit">{typeHendelSubmit}</button>
                             </form>
                         </div>
                     </div>
@@ -141,12 +152,9 @@ export function BottomCards() {
                                             <DeleteIcon />
                                         </div>
                                         <div onClick={() => {
-                                            dispatch(acUpdateCrud(contact))
-                                            enqueueSnackbar(`${contact.name} successfully edited`, {
-                                                autoHideDuration: "2000",
-                                                variant: "success",
-                                            });
                                             setValue(contact)
+                                            setModalOpen(true);
+                                            setTypeHendelSubmit("Edit");
                                         }} id='bottom-contact-container-user-right-third'>
                                             <EditIcon />
                                         </div>
@@ -193,12 +201,9 @@ export function BottomCards() {
                                             <DeleteIcon />
                                         </div>
                                         <div onClick={() => {
-                                            dispatch(acUpdateCrud(contact))
-                                            enqueueSnackbar(`${contact.name} successfully edited`, {
-                                                autoHideDuration: "2000",
-                                                variant: "success",
-                                            });
                                             setValue(contact)
+                                            setModalOpen(true);
+                                            setTypeHendelSubmit("Edit");
                                         }} id='bottom-contact-container-user-right-third'>
                                             <EditIcon />
                                         </div>
