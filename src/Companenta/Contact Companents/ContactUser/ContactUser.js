@@ -15,7 +15,7 @@ import { useSnackbar } from 'notistack'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-
+import { acLoading } from '../../../Redux/Loading'
 
 export function ContactUser() {
     const { enqueueSnackbar } = useSnackbar();
@@ -38,6 +38,12 @@ export function ContactUser() {
 
     const addNewContact = (e) => {
         e.preventDefault();
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
         if (typeHendelSubmit === "Add") {
             setModalOpen(false)
             const hozirgi = new Date().getTime()
@@ -54,7 +60,13 @@ export function ContactUser() {
             dispatch(acUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
-            enqueueSnackbar(`${value.name} successfully edited`, {
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
+            enqueueSnackbar(`${value.contactsName} successfully edited`, {
                 autoHideDuration: "2000",
                 variant: "success",
             });
@@ -143,6 +155,7 @@ export function ContactUser() {
                                     <div id="user-email">
                                         <IconButton>
                                             <DeleteIcon
+                                                style={{ color: "#5149E4", fontSize: "25px" }}
                                                 onClick={() => {
                                                     dispatch(acDeleteCrud(item.id))
                                                     enqueueSnackbar(`${item.contactsName} successfully deleted`, {
@@ -152,7 +165,6 @@ export function ContactUser() {
                                                 }}
                                             />
                                         </IconButton>
-                                        <span>{item.contactsMessage}</span>
                                     </div>
                                     <div id="user-email">
                                         <IconButton
@@ -164,7 +176,6 @@ export function ContactUser() {
                                         >
                                             <EditIcon style={{ color: "#5149E4", fontSize: "25px" }} />
                                         </IconButton>
-                                        <span>{item.contactsMessage}</span>
                                     </div>
                                 </div>
                             </div>

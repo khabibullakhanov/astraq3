@@ -215,11 +215,21 @@
     color: red;
 }
 
-#banking-right-grey-background:hover #bankingEdite {
+/* #banking-right-grey-div:hover #bankingEdite {
     display: block;
+    color: red;
 }
 
-#banking-right-grey-background>#bankingEdite{
+#banking-right-grey-div>#bankingEdite{
+    display: none;
+} */
+
+#banking-right-grey-background:hover #bankingDelete {
+    display: block;
+    color: red;
+}
+
+#banking-right-grey-background>#bankingDelete{
     display: none;
 }
 

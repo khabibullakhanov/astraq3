@@ -17,6 +17,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { acLoading } from "../../Redux/Loading"
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 export function Kanban() {
@@ -28,6 +33,8 @@ export function Kanban() {
     const [newProject, setNewProject] = useState([])
     const [deleteItems, setDeleteItems] = useState(false)
     const [remove, setRemove] = useState(false)
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
     useEffect(() => {
         localStorage.setItem("users", JSON.stringify(kanbanUsers));
@@ -37,31 +44,47 @@ export function Kanban() {
     localStorage.setItem("yangiProjektLength", JSON.stringify(user.length))
     const addNewContact = (e) => {
         e.preventDefault();
-        setModalOpen(false)
-        const NowDate = new Date().getTime()
-        const newKanban = {
-            kanbanId: NowDate,
-            kanbanName: e.target.name.value,
-            kanbanWork: e.target.work.value,
-            kanbanProgress: e.target.progress.value,
-            kanbanTeam: e.target.team.value,
-            kanbanProject: e.target.project.value,
-            kanbanMessage: e.target.message.value,
-            kanbanColor: e.target.color.value,
-        }
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
 
-        dispatch(acAddCrud(newKanban))
-        e.target.name.value = ""
-        e.target.work.value = ""
-        e.target.progress.value = ""
-        e.target.team.value = ""
-        e.target.project.value = ""
-        e.target.message.value = ""
-        e.target.color.value = ""
-        enqueueSnackbar("Project successfully saved", {
-            autoHideDuration: "2000",
-            variant: "success",
-        });
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const NowDate = new Date().getTime()
+            const newKanban = {
+                id: NowDate,
+                kanbanName: e.target.name.value,
+                kanbanWork: e.target.work.value,
+                kanbanProgress: e.target.progress.value,
+                kanbanTeam: e.target.team.value,
+                kanbanProject: e.target.project.value,
+                kanbanMessage: e.target.message.value,
+                kanbanColor: e.target.color.value,
+            }
+
+            dispatch(acAddCrud(newKanban))
+            enqueueSnackbar(`${value.kanbanName} successfully saved`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
+            enqueueSnackbar(`${value.kanbanName} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
     }
 
     const yangiProjects = cart.concat(user)
@@ -153,15 +176,15 @@ export function Kanban() {
                         <h2 onClick={() => { setModalOpen(false) }}>X</h2>
                     </div>
                     <form id='dash-contact-modal-form' onSubmit={addNewContact}>
-                        <TextField required name='name' label="Type name..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, name: e.target.value }) }} placeholder="Contact name..." />
-                        <TextField required name='work' label="Type job..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, work: e.target.value }) }} placeholder="Contact job..." />
-                        <TextField required name='progress' type="number" label="Type progress percent..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, progressLength: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required name='team' type="text" label="Type team members..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, team: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required name='project' type="number" label="Type projects..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, skripka: e.target.value }) }} placeholder="Phone number..." />
-                        <TextField required name='message' label="Type message..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, message: e.target.value }) }} placeholder="Text..." />
-                        <TextField required name='color' type="color" label="Choose color..." variant="outlined" onChange={(e) => { setNewProject({ ...newProject, color: e.target.value }) }} placeholder="Text..." />
+                        <TextField required value={value.kanbanName} name='name' label="Type name..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanName: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required value={value.kanbanWork} name='work' label="Type job..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanWork: e.target.value }) }} placeholder="Contact job..." />
+                        <TextField required value={value.kanbanProgress} name='progress' type="number" label="Type progress percent..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanProgress: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required value={value.kanbanTeam} name='team' type="text" label="Type team members..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanTeam: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required value={value.kanbanProject} name='project' type="number" label="Type projects..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanProject: e.target.value }) }} placeholder="Phone number..." />
+                        <TextField required value={value.kanbanMessage} name='message' label="Type message..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanMessage: e.target.value }) }} placeholder="Text..." />
+                        <TextField required value={value.kanbanColor} name='color' type="color" label="Choose color..." variant="outlined" onChange={(e) => { setValue({ ...value, kanbanColor: e.target.value }) }} placeholder="Text..." />
                         <button type='submit'>
-                            Add Contact
+                            {typeHendelSubmit}
                         </button>
                     </form>
                 </div>
@@ -199,7 +222,28 @@ export function Kanban() {
                                         <img src={chatLogo} alt="" />
                                         <p>{item.kanbanMessage}</p>
                                     </div>
-                                    <h2 onClick={() => { dispatch(acDeleteCrud(item.id)) }} style={deleteItems ? { display: "block" } : { display: "none" }}><ClearIcon /></h2>
+                                    <div style={{marginTop:"10px", marginLeft:"-10px",}}>
+                                        <IconButton
+                                            onClick={() => {
+                                                dispatch(acDeleteCrud(item.id))
+                                                enqueueSnackbar(`${item.kanbanName} successfully deleted`, {
+                                                    autoHideDuration: "2000",
+                                                    variant: "success",
+                                                });
+                                            }}
+                                        >
+                                            <DeleteIcon style={{ color: "#5149E4", fontSize: "25px", }} />
+                                        </IconButton>
+                                        <IconButton
+                                            onClick={() => {
+                                                setValue(item)
+                                                setModalOpen(true)
+                                                setTypeHendelSubmit("Edite")
+                                            }}
+                                        >
+                                            <EditIcon style={{ color: "#5149E4", fontSize: "25px", }} />
+                                        </IconButton>
+                                    </div>
                                 </div>
                             </div>
                         )

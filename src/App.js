@@ -10,11 +10,12 @@ import { Kanban } from './Pages/Kanban/Kanban';
 import { Invoice } from './Pages/Invoice/Invoice';
 import { Banking } from './Pages/Banking/Banking';
 import { Ticketing } from './Pages/Ticketing/Ticketing';
-
-
+import { useSelector } from "react-redux";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 
 function App() {
+  const loading = useSelector((state) => state.reLoading);
   return (
     <Router>
       <div className="App">
@@ -35,6 +36,9 @@ function App() {
 
         </div>
       </div>
+      <Backdrop sx={{ color: "#fff", zIndex: "99999999999999" }} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Router>
   );
 }

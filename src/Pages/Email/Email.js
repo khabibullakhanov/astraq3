@@ -46,7 +46,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
-
+import { acLoading } from '../../Redux/Loading'
 
 
 export function Email() {
@@ -103,6 +103,12 @@ export function Email() {
 
     const addNewContact = (e) => {
         e.preventDefault();
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
         if (typeHendelSubmit === "Add") {
             setModalOpen(false)
             const hoz = new Date().getTime()
@@ -111,7 +117,7 @@ export function Email() {
                 emailContactName: e.target.name.value,
                 emailContactJob: e.target.job.value,
             };
-            
+
             dispatch(acAddCrud(newEmailContacts))
             enqueueSnackbar(`${value.emailContactName} successfully added`, {
                 autoHideDuration: "2000",
@@ -121,6 +127,12 @@ export function Email() {
             dispatch(acUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
             enqueueSnackbar(`${value.emailContactName} successfully edited`, {
                 autoHideDuration: "2000",
                 variant: "success",

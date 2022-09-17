@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
 import EditIcon from '@mui/icons-material/Edit';
+import NumberFormat from "react-number-format";
+import { acLoading } from "../../../Redux/Loading";
 
-
-// import NumberFormat from 'react-number-format';
 export function BottomCards() {
 
     const dispatch = useDispatch();
@@ -31,29 +31,47 @@ export function BottomCards() {
     localStorage.setItem("yangiContactsLength", JSON.stringify(contacts.length))
     const addNewContact = (e) => {
         e.preventDefault();
-        if (typeHendelSubmit === "Add") {
-            setModalOpen(false)
-            const NowDate = new Date().getTime()
-            const newUser = {
-                id: NowDate,
-                name: e.target.name.value,
-                job: e.target.job.value,
-                message: e.target.message.value,
-            };
-            dispatch(acAddCrud(newUser))
-        } else {
-            dispatch(acUpdateCrud(value));
-            setTypeHendelSubmit("Add")
-            setModalOpen(false);
-            enqueueSnackbar(`${value.name} successfully edited`, {
-                autoHideDuration: "2000",
-                variant: "success",
-            });
-        }
-        setValue({name:"", job: "", message:"",})
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
+
+            if (typeHendelSubmit === "Add") {
+                setModalOpen(false)
+                const NowDate = new Date().getTime()
+                const newUser = {
+                    id: NowDate,
+                    name: e.target.name.value,
+                    job: e.target.job.value,
+                    message: e.target.message.value,
+                };
+                enqueueSnackbar(`${value.name} successfully added`, {
+                    autoHideDuration: "2000",
+                    variant: "success",
+                });
+                dispatch(acAddCrud(newUser))
+            } else {
+                dispatch(acUpdateCrud(value));
+                setTypeHendelSubmit("Add")
+                setModalOpen(false);
+                setTimeout(() => {
+                    dispatch(acLoading(true));
+                }, "1")
+                setTimeout(() => {
+                    dispatch(acLoading(false));
+                }, "1500")
+                enqueueSnackbar(`${value.name} successfully edited`, {
+                    autoHideDuration: "2000",
+                    variant: "success",
+                });
+            }
+        e.preventDefault();
+        setValue({ name: "", job: "", message: "", })
     }
 
-    
+
 
     const contactLength = dashUser.length
 
@@ -93,7 +111,7 @@ export function BottomCards() {
                                     onChange={(e) => { setValue({ ...value, name: e.target.value }) }}
                                 />
                                 <TextField
-                                required
+                                    required
                                     id="outlinedbasc"
                                     label="Username..."
                                     variant="outlined"
@@ -103,7 +121,7 @@ export function BottomCards() {
                                     onChange={(e) => { setValue({ ...value, job: e.target.value }) }}
                                 />
                                 <input
-                                required
+                                    required
                                     name="message"
                                     autoComplete="off"
                                     format="+998 (##) ### ####"
@@ -112,6 +130,7 @@ export function BottomCards() {
                                     value={value.message}
                                     onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
                                 />
+
 
                                 <button
                                     type="submit">{typeHendelSubmit}</button>
@@ -156,6 +175,7 @@ export function BottomCards() {
                                             setValue(contact)
                                             setModalOpen(true);
                                             setTypeHendelSubmit("Edit");
+                                            
                                         }} id='bottom-contact-container-user-right-third'>
                                             <EditIcon />
                                         </div>
@@ -189,10 +209,10 @@ export function BottomCards() {
                                         </div>
                                     </div>
                                     <div id='bottom-contact-container-user-right'>
-                                    <div id='bottom-message-container-main-user-right'>
-                                        <button>46</button>
-                                    </div>
-                                    <div onClick={() => {
+                                        <div id='bottom-message-container-main-user-right'>
+                                            <button>46</button>
+                                        </div>
+                                        <div onClick={() => {
                                             dispatch(acDeleteCrud(contact.id))
                                             enqueueSnackbar(`${contact.name} successfully deleted`, {
                                                 autoHideDuration: "2000",

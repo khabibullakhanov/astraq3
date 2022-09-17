@@ -22,7 +22,7 @@ export function Header() {
   const [sendIcon, setSendIcon] = useState(false);
   const [message, setMessage] = useState([]);
   const [search, setSearch] = useState("");
-
+  const [datas, setDatas] = useState([]);
   const cart = JSON.parse(localStorage.getItem("xabarlar") || "[]");
 
   const submitMessage = () => {
@@ -31,6 +31,8 @@ export function Header() {
     setSee(false);
     localStorage.setItem("xabarlar", JSON.stringify([...cart, message]));
   };
+
+  const allData = JSON.parse(localStorage.getItem("users") || "[]")
 
 
   // const filtered = contacts.filter((value) => {
@@ -69,9 +71,8 @@ export function Header() {
             setSearch(event.target.value);
           }}
         />
-      
+
       </form>
-      { }
 
       <div id="header-container-right">
         <Link to="/">
