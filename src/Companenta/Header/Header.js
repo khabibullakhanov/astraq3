@@ -35,30 +35,6 @@ export function Header() {
   const allData = JSON.parse(localStorage.getItem("users") || "[]")
 
 
-  // const filtered = contacts.filter((value) => {
-  //     if (search === "") {
-  //         return value;
-  //     } else if (
-  //         value.name
-  //             .toLocaleLowerCase()
-  //             .includes(search.toLocaleLowerCase()) ||
-  //         value.job
-  //             .toLocaleLowerCase()
-  //             .includes(search.toLocaleLowerCase())
-  //     ) {
-  //         return value.name;
-  //         return value.job;
-  //     } else {
-  //     }
-
-  //     if (search === "") {
-  //         return value;
-  //     } else if (
-  //         value.phone.includes(search)) {
-  //         return value.phone;
-  //     }
-  // })
-
   return (
     <div id="header-container">
       <form id="search-form">

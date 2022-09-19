@@ -79,9 +79,9 @@ export function Email() {
             newEmailMessagesId: hozir,
             emailLeftMes: e.target.mes.value,
         };
+        setValue({ emailLeftMes: "" })
 
         dispatch(acAddCrud(newEmailMessages))
-        e.target.name.value = ""
     }
 
     useEffect(() => {
@@ -352,13 +352,13 @@ export function Email() {
                     {emailMessages.map((item, index) => {
                         return (
                             <div id="email-xabar-div">
-                                <h6>{item.mes}</h6>
+                                <h6>{item.emailLeftMes}</h6>
                             </div>
                         )
                     })}
                     <form onSubmit={submitXabar}>
                         <div id='email-main-container-right-message-container'>
-                            <input name='mes' type="text" onChange={(e) => { setMessage({ ...message, xabar: e.target.value }) }} />
+                            <input name='mes' value={value.emailLeftMes} type="text" onChange={(e) => { setValue({ ...value, emailLeftMes: e.target.value }) }} />
                             <div id='email-main-container-right-message-container-bottom'>
                                 <div id='email-main-container-right-message-container-bottom-left'>
                                     <img src={betta} alt="" />

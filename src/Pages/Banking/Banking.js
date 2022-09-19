@@ -72,6 +72,7 @@ export function Banking() {
             const newBankingUser = {
                 id: NowDate,
                 bankingUserName: e.target.name.value,
+                bankingMoney: e.target.money.value,
             };
             dispatch(acAddCrud(newBankingUser))
             enqueueSnackbar(`${value.name} successfully added`, {
